@@ -21,6 +21,14 @@ repositories {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
     }
+    maven {
+        name = "sonatype-snapshots"
+        url = "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
+    maven {
+        name = "md-5"
+        url = "https://repo.md-5.net/content/groups/public/"
+    }
 }
 
 build.dependsOn(shadowJar);
@@ -30,7 +38,9 @@ shadowJar {
 }
 
 dependencies {
-    compileOnly "org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT"
+    compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT") {
+        exclude group: 'net.md-5', module: 'bungeecord-chat'
+    }
     compileOnly "com.github.retrooper.packetevents:spigot:2.3.0"
 
     implementation "it.unimi.dsi:fastutil:8.2.1"
